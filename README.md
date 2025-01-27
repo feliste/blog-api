@@ -19,7 +19,7 @@ Follow these steps to install and set up the project locally:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/project-name.git
+git clone https://github.com/feliste/blog-api.git
 cd project-name
 ```
 ### Install Dependencies
