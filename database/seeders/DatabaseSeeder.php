@@ -6,29 +6,55 @@ use Illuminate\Database\Seeder;
 use App\Models\Author;
 use App\Models\Post;
 use App\Models\Comment;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Create 1000 authors
-        $authors = Author::factory(1000)->create();
+        // Seed authors
+        $authors = Author::factory(1000)->make()->toArray();  
+        DB::table('authors')->insert($authors);  
 
-        // For each author, create between 100 and 500 posts
-        $authors->each(function ($author) {
-            $postCount = rand(100, 500);
-            $posts = Post::factory($postCount)->create([
-                'author_id' => $author->id, 
-            ]);
+        // Create posts
+        $posts = [];
+        $authors = Author::all(); 
 
-            // For each post, create between 1 and 50 comments
-            $posts->each(function ($post) {
-                $commentCount = rand(1, 50);
-                Comment::factory($commentCount)->create([
-                    'post_id' => $post->id, 
-                    'author_id' => Author::factory()->create()->id, 
-                ]);
-            });
-        });
+        foreach ($authors as $author) {
+            $numPosts = rand(100, 500);  
+
+            foreach (range(1, $numPosts) as $index) {
+                $posts[] = [
+                    'author_id' => $author->id,
+                    'title' => "Post Title {$author->id}-{$index}",
+                    'body' => 'Post body content here.',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+        }
+
+        DB::table('posts')->insert($posts);  
+
+        // Create comments
+        $comments = [];
+        $posts = Post::all();  
+
+        foreach ($posts as $post) {
+            $numComments = rand(1, 50);  
+
+            foreach (range(1, $numComments) as $index) {
+                $comments[] = [
+                    'post_id' => $post->id,
+                    'author_id' => $authors->random()->id,
+                    'name' => "Comment Author {$index}",
+                    'text' => 'Comment text here.',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+        }
+
+        DB::table('comments')->insert($comments);  
     }
 }
