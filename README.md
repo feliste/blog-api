@@ -68,5 +68,5 @@ php artisan test
 
 **API Documentation with Swagger**: 
   - Publish Configuration Files `php artisan vendor:publish --provider="L5Swagger\L5SwaggerServiceProvider"`.
-  - Instructions to access the Swagger UI (`http://localhost:8000/api/documentation`).
-  - How to generate the Swagger documentation use `php artisan l5-swagger:generate`.
+  - Access the Swagger UI (`http://localhost:8000/api/documentation`).
+  - To generate the Swagger documentation use `php artisan l5-swagger:generate`.
