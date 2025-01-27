@@ -10,7 +10,6 @@ Before you begin, ensure that you have the following installed:
 -   [Composer](https://getcomposer.org/) (PHP dependency manager)
 -   [Laravel](https://laravel.com/docs) (Web application framework)
 -   [MySQL](https://www.mysql.com/) or any other database supported by Laravel
--   [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) for frontend assets (if applicable)
 
 ## Installation
 
